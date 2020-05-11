@@ -4,13 +4,14 @@ package cli
 
 import (
 	"fmt"
-	sddbus "github.com/coreos/go-systemd/dbus"
-	sdunit "github.com/coreos/go-systemd/unit"
+	"io"
+	"os"
+
+	sddbus "github.com/coreos/go-systemd/v22/dbus"
+	sdunit "github.com/coreos/go-systemd/v22/unit"
 	"github.com/hlandau/acmetool/interaction"
 	"gopkg.in/hlandau/svcutils.v1/exepath"
 	"gopkg.in/hlandau/svcutils.v1/systemd" // coreos/go-systemd/util requires cgo
-	"io"
-	"os"
 )
 
 func promptSystemd() {
@@ -99,7 +100,7 @@ The service name will be acmetool-redirector.`,
 	_, err = interaction.Auto.Prompt(&interaction.Challenge{
 		Title: "systemd Service Installation Complete",
 		Body: fmt.Sprintf(`acmetool-redirector has been installed as a systemd service.
-    
+
     %s`, resultStr),
 		UniqueID: "acmetool-quickstart-complete",
 	})
